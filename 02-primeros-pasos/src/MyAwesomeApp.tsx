@@ -1,36 +1,34 @@
-const firtsName = 'angels';
-const lastName = 'mejia';
+const firtsName = "angels";
+const lastName = "mejia";
 
-const juegos =['forrnite','gd', 'metro']
+const juegos = ["forrnite", "gd", "metro"];
 
 const isActive = false;
 
 const address = {
-    zipCode: 'ABC-123',
-    country: 'abasolo'
+  zipCode: "ABC-123",
+  country: "abasolo",
 };
 
 export function MyAwesomeApp() {
+  return (
+    <div data-testid="div-app">
+      <h1 data-testid="firts-namee">{firtsName}</h1>
+      <h3>{lastName}</h3>
 
+      <p className="miClaseFavorita">{juegos.join(",")}</p>
 
+      <h1>{isActive ? "activoxnds" : ":,vv"}</h1>
 
-
-    return (
-        <>
-            <h1>{firtsName}</h1>
-            <h3>{lastName}</h3>
-
-            <p>{juegos.join(',')}</p>
-
-
-            <h1>{isActive ? 'activoxndsadas' : ':,vv'}</h1>
-
-            <p style={{
-                backgroundColor: 'red',
-                borderRadius: 10,
-                padding: 10
-            }}>{JSON.stringify(address)}</p>
-
-        </>
-    )
+      <p
+        style={{
+          backgroundColor: "red",
+          borderRadius: 10,
+          padding: 10,
+        }}
+      >
+        {JSON.stringify(address)}
+      </p>
+    </div>
+  );
 }
