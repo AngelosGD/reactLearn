@@ -58,4 +58,15 @@ describe("ItemCounter", () => {
 
     expect(screen.getByText("1")).toBeDefined();
   });
+
+  test("shpuld change to red when count its 1", () => {
+    const name = "test item";
+    const quantity = 1;
+
+    render(<ItemCounter name={name} quantity={quantity} />);
+
+    const itemText = screen.getByText(name);
+
+    expect(itemText.style.color).toBe("black");
+  });
 });
