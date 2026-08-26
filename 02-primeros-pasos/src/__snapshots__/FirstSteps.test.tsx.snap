@@ -5,62 +5,14 @@ exports[`First steps > shoud match snapshot 1`] = `
   <h1>
     Carrito de compras
   </h1>
-  <section
-    class="_item-row_8b32a2"
-  >
-    <span
-      class="item-text"
-      style="color: black;"
-    >
-      Nintendo swtich2xdd
-    </span>
-    <button>
-      +1
-    </button>
-    <span>
-      10
-    </span>
-    <button>
-      -1
-    </button>
-  </section>
-  <section
-    class="_item-row_8b32a2"
-  >
-    <span
-      class="item-text"
-      style="color: red;"
-    >
-      exbos
-    </span>
-    <button>
-      +1
-    </button>
-    <span>
-      0
-    </span>
-    <button>
-      -1
-    </button>
-  </section>
-  <section
-    class="_item-row_8b32a2"
-  >
-    <span
-      class="item-text"
-      style="color: black;"
-    >
-      diyin light 3 :000
-    </span>
-    <button>
-      +1
-    </button>
-    <span>
-      2
-    </span>
-    <button>
-      -1
-    </button>
-  </section>
+  <div
+    data-testid="ItemCounter"
+  />
+  <div
+    data-testid="ItemCounter"
+  />
+  <div
+    data-testid="ItemCounter"
+  />
 </div>
 `;
