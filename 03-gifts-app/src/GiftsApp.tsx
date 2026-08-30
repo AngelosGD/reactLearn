@@ -12,6 +12,10 @@ export const GiftsApp = () => {
     console.log({term})
   }
 
+  const handleSearch = (query: string) =>{
+    console.log({query})
+  }
+
   return (
     <>
       {/* header */}
@@ -22,7 +26,7 @@ export const GiftsApp = () => {
       />
 
       {/* search */}
-      <SearchBar placeholder="Busca el gift que quieras caon" />
+      <SearchBar placeholder="Busca el gift que quieras caon" onHandleSearch={handleSearch}/>
 
       {/* Busquedas preview */}
       <PreviousSearches searches={previousTerms} onLabelClicked={handleTermClicked}/>
