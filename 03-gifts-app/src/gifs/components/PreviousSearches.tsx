@@ -1,16 +1,18 @@
+import '../../index.css'
+interface PreviousSearchesProps{
+    searches: string[]
+}
 
 
-
-export default function PreviousSearches() {
+export default function PreviousSearches({searches}: PreviousSearchesProps) {
   return (
     <>
       <div className="previous-searches">
         <h2>busquedas previas</h2>
         <ul className="previous-searches-list">
-          <li>goku</li>
-          <li>gede</li>
-          <li>deku</li>
-          <li>saitama</li>
+          {searches.map((search) =>(
+            <li key={search}>{search}</li>
+          ))}
         </ul>
       </div>
     </>
