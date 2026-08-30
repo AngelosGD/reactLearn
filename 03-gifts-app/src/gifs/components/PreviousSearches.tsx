@@ -1,17 +1,18 @@
 import '../../index.css'
 interface PreviousSearchesProps{
-    searches: string[]
+    searches: string[],
+    onLabelClicked: (term: string) => void;
 }
 
 
-export default function PreviousSearches({searches}: PreviousSearchesProps) {
+export default function PreviousSearches({searches, onLabelClicked}: PreviousSearchesProps) {
   return (
     <>
       <div className="previous-searches">
         <h2>busquedas previas</h2>
         <ul className="previous-searches-list">
           {searches.map((search) =>(
-            <li key={search}>{search}</li>
+            <li  onClick={() => onLabelClicked(search)} key={search}>{search}</li>
           ))}
         </ul>
       </div>
