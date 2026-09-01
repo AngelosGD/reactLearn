@@ -23,7 +23,7 @@ export default function SearchBar({
   }, [query, onHandleSearch]);
 
   const handleSearch = () => {
-    onHandleSearch(query);
+    // onHandleSearch(query);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

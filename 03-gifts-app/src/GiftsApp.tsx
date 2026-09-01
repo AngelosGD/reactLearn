@@ -8,13 +8,21 @@ import { useState } from "react";
 export const GiftsApp = () => {
   const [previousTerms, setPreviousTerms] = useState(["dbz", "dying light"]);
 
-  const handleTermClicked = (term: string)=>{
-    console.log({term})
-  }
+  const handleTermClicked = (term: string) => {
+    console.log({ term });
+  };
 
-  const handleSearch = (query: string) =>{
-    console.log({query})
-  }
+  const handleSearch = (query: string = "") => {
+    query = query.trim().toLowerCase();
+    // validar si el query esta vacio
+    if (query.length === 0) return;
+
+    // evitar busqueda duplicadas
+    if (previousTerms.includes(query)) return;
+
+    //  actualziar previousTermn agregando nuevo termino al inicio, y limtandolo a 8 elemetnos
+    setPreviousTerms([query, ...previousTerms].splice(0, 6));
+  };
 
   return (
     <>
@@ -26,10 +34,16 @@ export const GiftsApp = () => {
       />
 
       {/* search */}
-      <SearchBar placeholder="Busca el gift que quieras caon" onHandleSearch={handleSearch}/>
+      <SearchBar
+        placeholder="Busca el gift que quieras caon"
+        onHandleSearch={handleSearch}
+      />
 
       {/* Busquedas preview */}
-      <PreviousSearches searches={previousTerms} onLabelClicked={handleTermClicked}/>
+      <PreviousSearches
+        searches={previousTerms}
+        onLabelClicked={handleTermClicked}
+      />
 
       {/* Mostra los gifts */}
       <GifList gifs={mockGifs} />
