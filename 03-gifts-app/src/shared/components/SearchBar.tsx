@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface CustomSearchBar {
   placeholder?: string;
@@ -11,12 +11,23 @@ export default function SearchBar({
 }: CustomSearchBar) {
   const [query, setQuery] = useState("");
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      onHandleSearch(query);
+    }, 700);
+    // onHandleSearch(query);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [query, onHandleSearch]);
+
   const handleSearch = () => {
     onHandleSearch(query);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {  
+    if (e.key === "Enter") {
       handleSearch();
     }
   };
