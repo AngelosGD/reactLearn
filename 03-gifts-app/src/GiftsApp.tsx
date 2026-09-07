@@ -4,6 +4,7 @@ import PreviousSearches from "./gifs/components/PreviousSearches";
 import { GifList } from "./gifs/components/GifList";
 import { mockGifs } from "./mock-data/gifs.mock";
 import { useState } from "react";
+import { getGifsByQuery } from "./gifs/actions/get-gifs-by-query.action";
 
 export const GiftsApp = () => {
   const [previousTerms, setPreviousTerms] = useState(["dbz", "dying light"]);
@@ -12,7 +13,7 @@ export const GiftsApp = () => {
     console.log({ term });
   };
 
-  const handleSearch = (query: string = "") => {
+  const handleSearch = async(query: string = "") => {
     query = query.trim().toLowerCase();
     // validar si el query esta vacio
     if (query.length === 0) return;
@@ -22,6 +23,9 @@ export const GiftsApp = () => {
 
     //  actualziar previousTermn agregando nuevo termino al inicio, y limtandolo a 8 elemetnos
     setPreviousTerms([query, ...previousTerms].splice(0, 6));
+
+    const gifs = await getGifsByQuery(query)
+    console.log({gifs})
   };
 
   return (
