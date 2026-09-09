@@ -20,11 +20,11 @@ export interface GiphyGif {
   source_post_url: string;
   is_sticker: number;
   import_datetime: Date;
+  trending_datetime: string;
   images: Images;
   analytics_response_payload: string;
   analytics: Analytics;
   alt_text: string;
-  is_low_contrast: boolean;
   user?: User;
 }
 
@@ -55,12 +55,13 @@ export interface Images {
   fixed_width_small: FixedHeight;
   fixed_width_small_still: The480_WStill;
   fixed_width_still: The480_WStill;
+  looping: Looping;
   original_still: The480_WStill;
   original_mp4: DownsizedSmall;
   preview: DownsizedSmall;
   preview_gif: The480_WStill;
   preview_webp: The480_WStill;
-  "480w_still": The480_WStill;
+  '480w_still': The480_WStill;
   hd?: DownsizedSmall;
 }
 
@@ -91,12 +92,14 @@ export interface FixedHeight {
   hash?: string;
 }
 
+export interface Looping {
+  mp4_size: string;
+  mp4: string;
+}
 
-export type Rating = 'G' | 'PG'
+export type Rating = 'G' | 'PG';
 
-
-
-export type Type = 'gif'
+export type Type = 'gif';
 
 export interface User {
   avatar_url: string;
@@ -109,7 +112,6 @@ export interface User {
   website_url: string;
   is_verified: boolean;
 }
-
 
 export interface Meta {
   status: number;

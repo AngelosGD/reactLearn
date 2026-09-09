@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-
+import { useState } from 'react';
 
 export const useCounter = (initialValue: number = 10) => {
   const [counter, setCounter] = useState(initialValue);
@@ -9,7 +7,7 @@ export const useCounter = (initialValue: number = 10) => {
     setCounter(counter + 1);
   };
 
-  const handleSub = () => {
+  const handleSubtract = () => {
     setCounter((prevState) => prevState - 1);
   };
 
@@ -18,11 +16,12 @@ export const useCounter = (initialValue: number = 10) => {
   };
 
   return {
-    // Props - values
-    counter: counter,
-    // actions - methods
+    // Values
+    counter,
+
+    // Methods / Actions
     handleAdd,
-    handleSub,
-    handleReset
+    handleSubtract,
+    handleReset,
   };
 };
