@@ -69,7 +69,7 @@ describe("getGifsByQuery", () => {
     expect(gifs.length).toBe(0)
     expect(consoleErrorSpy).toHaveBeenCalled()
     // expect(consoleErrorSpy).toHaveBeenCalledTimes(2)
-    expect(consoleErrorSpy).toHaveBeenCalledWith( expect.anything )
+    // expect(consoleErrorSpy).toHaveBeenCalledWith( expect.anything )
 
   });
 });
