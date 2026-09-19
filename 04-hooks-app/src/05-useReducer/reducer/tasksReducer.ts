@@ -1,3 +1,4 @@
+import { todo } from "node:test";
 import { act } from "react";
 
 interface Todo {
@@ -62,12 +63,16 @@ export const tasksReducer = (
 
         case 'DELETE_TODO':
             {
+                const currentTodos = state.todos.filter((todo) => todo.id !== action.payload)
                 return {
                     ...state,
                     // ? este filter regresa UN NUEVO ARREGLO, lo cual es lo que buscamos
                     // ? parecido arriba le pasamos el action,payload en el id que es lo que pusimos como el properti
-                    todos: state.todos.filter((todo) => todo.id !== action.payload),
+                    todos: currentTodos,
                     length: state.todos.length,
+                    completed: currentTodos.filter((todo) => todo.completed).length,
+                    pending: currentTodos.filter((todo) => !todo.completed).length
+                    
 
                 }
             }
@@ -81,7 +86,10 @@ export const tasksReducer = (
             })
             return {
                 ...state,
-                todos: updatedTodos
+                todos: updatedTodos,
+                completed: updatedTodos.filter((todo) => todo.completed).length,
+                pending: updatedTodos.filter((todo) => !todo.completed).length
+                    
             } 
         }
 
