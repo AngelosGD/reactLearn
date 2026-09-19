@@ -1,3 +1,5 @@
+import * as z from "zod/v4";
+
 interface Todo {
   id: number;
   text: string;
@@ -19,6 +21,22 @@ export type TaskAction =
   | { type: "TOGGLE_TODO"; payload: number }
   | { type: "DELETE_TODO"; payload: number };
 
+//   ? usamos zod para validar el esquema ya que alguien con conocimiento puede modificar el localStoragexd
+
+const TodoSchema = z.object({
+  id: z.number(),
+  text: z.string(),
+  completed: z.boolean(),
+});
+// ? creamos tambien el esquema del TaskState, en el caso del todos que es un arreglo
+// ? solo le pasamos z.array y pasamos el TodoScheme
+const TaskStateScheme = z.object({
+  todos: z.array(TodoSchema),
+  length: z.number(),
+  completed: z.number(),
+  pending: z.number(),
+});
+
 export const getTasksInitialState = (): TaskState => {
   const localStorageState = localStorage.getItem("tasks-state");
 
@@ -30,8 +48,24 @@ export const getTasksInitialState = (): TaskState => {
       length: 0,
     };
   }
+
+  //   ? validar mediante zod
+  const result = TaskStateScheme.safeParse(JSON.parse(localStorageState));
+
+  //   ? si hay errores entonces regresamos el estado vacio para que no se rompa D:
+  if (result.error) {
+    console.log(result.error);
+    return {
+      todos: [],
+      completed: 0,
+      pending: 0,
+      length: 0,
+    };
+  }
+
   //! el objeto puede haber sido modifica CUIDADO
-  return JSON.parse(localStorageState);
+  //   ? finalmente retornamos el result.data lo cual tendra la respuesta del result
+  return result.data;
 };
 // ! los reducers son funciones que siempre devuelvan un nuevo estado o un valor, no podemos retornar sin este nuevo estado o valor
 // ! siempre debe regresar el tipo de state que se le dio en este caso TaskState
