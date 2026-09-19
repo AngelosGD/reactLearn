@@ -65,8 +65,18 @@ export const tasksReducer = (
                 }
             }
 
-        case 'TOGGLE_TODO':
-            return state;
+        case 'TOGGLE_TODO': { 
+                const updatedTodos = state.todos.map((todo) =>{
+                if(todo.id === action.payload){
+                    return{...todo, completed: !todo.completed}
+                }
+                return todo
+            })
+            return {
+                ...state,
+                todos: updatedTodos
+            } 
+        }
 
         // ? siempre debe regresar el state, ya sea actual, por eso el default y retornamos el state
         default:
