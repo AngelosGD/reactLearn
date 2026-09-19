@@ -56,7 +56,14 @@ export const tasksReducer = (
             }
 
         case 'DELETE_TODO':
-            return state;
+            {
+                return {
+                    ...state,
+                    // ? este filter regresa UN NUEVO ARREGLO, lo cual es lo que buscamos
+                    // ? parecido arriba le pasamos el action,payload en el id que es lo que pusimos como el properti
+                    todos: state.todos.filter((todo) => todo.id !== action.payload)
+                }
+            }
 
         case 'TOGGLE_TODO':
             return state;
