@@ -1,7 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { FocusScreen } from './04-useRef/FocusScreen'
+import { TasksApp } from './05-useReducer/TaskApp'
+// import { FocusScreen } from './04-useRef/FocusScreen'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -10,6 +11,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <TrafficLightWithEffect/> */}
     {/* <TrafficLightWithHook/> */}
     {/* <PokemonPage/> */}
-    <FocusScreen/>
+    {/* <FocusScreen/> */}
+    <TasksApp/>
   </StrictMode>,
 )
