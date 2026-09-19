@@ -12,26 +12,33 @@ interface pokemonProps {
 
 export const usePokemon = ({ id }: pokemonProps) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [isLoading, setIsLoading] = useState(true)
 
+  const getPokemonById = async (id: number) => {
+    setIsLoading(true)
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 
-  const getPokemonById = async(id: number) =>{
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/1');
-
-    const data = await response.json()
+    const data = await response.json();
 
     setPokemon({
-        id: id,
-        name: data.name,
-        imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-    })
-  }
+      id: id,
+      name: data.name,
+      imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+    });
 
-  useEffect(() =>{
+    setIsLoading(false)
+  };
 
-  })
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    getPokemonById(id);
+  }, [id]);
 
   return {
     // ? properties
+    isLoading,
     pokemon,
+    // ? computed 
+    formaterId: id.toString().padStart(3,'0')
   };
 };
