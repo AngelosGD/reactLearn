@@ -51,7 +51,12 @@ export const tasksReducer = (
                 // * estado nuevo, ponemos los todos en el ...state.todos y agregando el newTodo, la logica del mismo
                 return {
                     ...state,
-                    todos: [...state.todos, newTodo]
+                    todos: [...state.todos, newTodo],
+                    length: state.todos.length + 1,
+                    pending: state.pending + 1,
+
+
+
                 }
             }
 
@@ -61,7 +66,9 @@ export const tasksReducer = (
                     ...state,
                     // ? este filter regresa UN NUEVO ARREGLO, lo cual es lo que buscamos
                     // ? parecido arriba le pasamos el action,payload en el id que es lo que pusimos como el properti
-                    todos: state.todos.filter((todo) => todo.id !== action.payload)
+                    todos: state.todos.filter((todo) => todo.id !== action.payload),
+                    length: state.todos.length,
+
                 }
             }
 
