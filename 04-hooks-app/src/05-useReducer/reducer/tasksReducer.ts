@@ -1,5 +1,3 @@
-import { todo } from "node:test";
-import { act } from "react";
 
 interface Todo {
   id: number;
@@ -22,6 +20,15 @@ export type TaskAction =
   | { type: "TOGGLE_TODO"; payload: number }
   | { type: "DELETE_TODO"; payload: number };
 
+
+export const getTasksInitialState = (): TaskState =>{
+    return{
+        todos: [],
+        completed: 0,
+        pending:0,
+        length:0
+    }
+}
 // ! los reducers son funciones que siempre devuelvan un nuevo estado o un valor, no podemos retornar sin este nuevo estado o valor
 // ! siempre debe regresar el tipo de state que se le dio en este caso TaskState
 
