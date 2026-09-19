@@ -18,22 +18,43 @@ export const TasksApp = () => {
   const [inputValue, setInputValue] = useState('');
 
   const addTodo = () => {
-    console.log('Agregar tarea', inputValue);
+    if(inputValue.length === 0) return
+
+    const newTodo: Todo = {
+        id: Date.now(),
+        text: inputValue.trim(),
+        completed: false
+    }
+
+    setTodos([...todos,newTodo])
+
+    setInputValue('')
 
   };
 
   const toggleTodo = (id: number) => {
-    console.log('Cambiar de true a false', id);
 
+    // ? mapeamos los todos, y despues evaluamos si el todo.id es igual al id que tomamos o del que seleccionamos
+    // ? barremos los todos y despues ponemos el completed al contrario de lo que tiene
+    const updatedTodos = todos.map((todo) => {
+        if(todo.id === id){
+            return{...todo, completed: !todo.completed}
+        }
+        return todo
+    })
+
+    setTodos(updatedTodos)
   };
 
   const deleteTodo = (id: number) => {
-    console.log('Eliminar tarea', id);
-
+    // ? simplemente filtramos todos los todos y si el todo id es diferente del id, lo barremos
+    setTodos(todos.filter((todo) => todo.id !== id))
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    console.log('Presiono enter');
+    if(e.key === 'Enter'){
+        addTodo()
+    }
 
   };
 
