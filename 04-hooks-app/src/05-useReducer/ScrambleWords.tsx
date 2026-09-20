@@ -61,17 +61,20 @@ export const ScrambleWords = () => {
     e.preventDefault();
     // Implementar lógica de juego
     console.log('Intento de adivinanza:', guess, currentWord);
+    // ? este se activa al darle al boton de enviar adivinanza
 
   };
 
   const handleSkip = () => {
     console.log('Palabra saltada');
+    // ? este pos salta la palabra y pone otra nueva xd
 
     
   };
 
   const handlePlayAgain = () => {
     console.log('Jugar de nuevo');
+    // ? reinicia el game D:
     
   };
 
