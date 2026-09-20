@@ -69,6 +69,19 @@ export const ScrambleWords = () => {
     console.log('Palabra saltada');
     // ? este pos salta la palabra y pone otra nueva xd
 
+    // * filtramos las palabras restantes con un filter a las words con la curren word
+    const remaingWords = words.filter((word) => word !== currentWord)
+    const nextWord = remaingWords[0]
+
+    // * le damos las remaind words a las words
+    setWords(remaingWords)
+    // * la currentword la ponemos el nexWord que viene de la primera palabra de las palabras restantes (remaingWords)
+    setCurrentWord(nextWord)
+    // * para que se muestre la palabra revuelta le pasamos esa nextWord al setScrambledWord y con su funcion que las revuelve le pasamos esa nextWord
+    setScrambledWord(scrambleWord(nextWord))
+    setSkipCounter(skipCounter + 1)
+    setGuess('')
+
     
   };
 
