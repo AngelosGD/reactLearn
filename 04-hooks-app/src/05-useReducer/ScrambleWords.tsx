@@ -72,9 +72,15 @@ export const ScrambleWords = () => {
       setGuess('')
       setWords(remaingWords)
       setCurrentWord(nextWord)
-
       setScrambledWord(scrambleWord(nextWord))
+    } else{
+      setErrorCounter(errorCounter + 1)
+      if(errorCounter === maxAllowErrors - 1){
+        setIsGameOver(true)
+      }
     }
+
+
 
   };
 
@@ -101,7 +107,24 @@ export const ScrambleWords = () => {
   const handlePlayAgain = () => {
     console.log('Jugar de nuevo');
     // ? reinicia el game D:
-    
+    // * reiniciamos contadores como el counter, el input del guess, y los que se deban reiniciar
+    setGuess('')
+    setSkipCounter(0)
+    setErrorCounter(0)
+    setPoints(0)
+    setIsGameOver(false)
+
+    // * volvemos a reordenar las palabras con el shufflearray 
+    // * esas palabras con una variable se las pasamos a setWords
+    // *ponemos un nextWord parecido al handleSkip
+    // * ese lo pasamos al current word y la revolvemos
+    const word = shuffleArray(GAME_WORDS)
+    setWords(word)
+    const nextWord = word[0]
+    console.log(nextWord)
+    setCurrentWord(nextWord)
+    setScrambledWord(scrambleWord(nextWord))
+
   };
 
   //! Si ya no hay palabras para jugar, se muestra el mensaje de fin de juego
