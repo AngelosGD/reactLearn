@@ -63,6 +63,19 @@ export const ScrambleWords = () => {
     console.log('Intento de adivinanza:', guess, currentWord);
     // ? este se activa al darle al boton de enviar adivinanza
 
+    const remaingWords = words.filter((word) => word !== currentWord)
+    const nextWord = remaingWords[0]
+
+    if(guess === currentWord){
+      // * para subir el puntaje :D
+      setPoints(points + 1)
+      setGuess('')
+      setWords(remaingWords)
+      setCurrentWord(nextWord)
+
+      setScrambledWord(scrambleWord(nextWord))
+    }
+
   };
 
   const handleSkip = () => {
