@@ -183,7 +183,8 @@ export const ScrambleWords = () => {
                     type="text"
                     value={guess}
                     onChange={
-                      (e) => console.log(e.target)
+                      (e) =>
+                        dispatch({ type: "SET_GUESS", payload: e.target.value })
                       // setGuess(e.target.value.toUpperCase().trim())
                     }
                     placeholder="Ingresa tu palabra..."

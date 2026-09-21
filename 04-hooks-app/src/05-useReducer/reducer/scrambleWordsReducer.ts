@@ -69,15 +69,24 @@ export const getInitialState = (): ScrambeWordsState => {
 };
 
 export type ScrambleWordAction =
-  | { type: "NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO" }
-  | { type: "NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO2" }
+  | { type: "SET_GUESS"; payload: string }
+  | {
+      type: "NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO2";
+    }
   | { type: "NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO3" };
 
 export const scrambleWordsReducer = (
   state: ScrambeWordsState,
-  action: ScrambledWordsActions,
+  action: ScrambleWordAction,
 ) => {
   switch (action.type) {
+    // ? action para el input deje escribir
+    case "SET_GUESS":
+      return {
+        ...state,
+        guess: action.payload.trim().toUpperCase(),
+      };
+
     default:
       return state;
   }
