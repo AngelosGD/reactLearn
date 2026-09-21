@@ -2,7 +2,7 @@
 // Es necesario componentes de Shadcn/ui
 // https://ui.shadcn.com/docs/installation/vite
 
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,80 +30,18 @@ export const ScrambleWords = () => {
     totalWords,
   } = state;
 
-  // const [words, setWords] = useState(shuffleArray(GAME_WORDS));
-
-  // const [currentWord, setCurrentWord] = useState(words[0]);
-  // const [scrambledWord, setScrambledWord] = useState(scrambleWord(currentWord));
-  // const [guess, setGuess] = useState("");
-  // const [points, setPoints] = useState(0);
-  // const [errorCounter, setErrorCounter] = useState(0);
-  // const [maxAllowErrors, setMaxAllowErrors] = useState(3);
-
-  // const [skipCounter, setSkipCounter] = useState(0);
-  // const [maxSkips, setMaxSkips] = useState(3);
-
-  // const [isGameOver, setIsGameOver] = useState(false);
-
   const handleGuessSubmit = (e: React.FormEvent) => {
     // Previene el refresh de la página
     e.preventDefault();
     dispatch({ type: "CHECK_ANSWER" });
-    // // Implementar lógica de juego
-    // console.log("Intento de adivinanza:", guess, currentWord);
-    // // ? este se activa al darle al boton de enviar adivinanza
-    // if (guess === currentWord) {
-    //   // * para subir el puntaje :D
-    //   const remaingWords = words.filter((word) => word !== currentWord);
-    //   const nextWord = remaingWords[0];
-    //   setPoints(points + 1);
-    //   setGuess("");
-    //   setWords(remaingWords);
-    //   setCurrentWord(nextWord);
-    //   setScrambledWord(scrambleWord(nextWord));
-    // } else {
-    //   setErrorCounter(errorCounter + 1);
-    //   if (errorCounter === maxAllowErrors - 1) {
-    //     setIsGameOver(true);
-    //   }
-    //   setGuess("");
-    // }
   };
 
   const handleSkip = () => {
-    // console.log("Palabra saltada");
-    // // ? este pos salta la palabra y pone otra nueva xd
-    // // * filtramos las palabras restantes con un filter a las words con la curren word
-    // const remaingWords = words.filter((word) => word !== currentWord);
-    // const nextWord = remaingWords[0];
-    // // * le damos las remaind words a las words
-    // setWords(remaingWords);
-    // // * la currentword la ponemos el nexWord que viene de la primera palabra de las palabras restantes (remaingWords)
-    // setCurrentWord(nextWord);
-    // // * para que se muestre la palabra revuelta le pasamos esa nextWord al setScrambledWord y con su funcion que las revuelve le pasamos esa nextWord
-    // setScrambledWord(scrambleWord(nextWord));
-    // setSkipCounter(skipCounter + 1);
-    // setGuess("");
+    dispatch({ type: "SKIP_WORD" });
   };
 
   const handlePlayAgain = () => {
-    // console.log("Jugar de nuevo");
-    // // ? reinicia el game D:
-    // // * reiniciamos contadores como el counter, el input del guess, y los que se deban reiniciar
-    // setGuess("");
-    // setSkipCounter(0);
-    // setErrorCounter(0);
-    // setPoints(0);
-    // setIsGameOver(false);
-    // // * volvemos a reordenar las palabras con el shufflearray
-    // // * esas palabras con una variable se las pasamos a setWords
-    // // *ponemos un nextWord parecido al handleSkip
-    // // * ese lo pasamos al current word y la revolvemos
-    // const word = shuffleArray(GAME_WORDS);
-    // setWords(word);
-    // const nextWord = word[0];
-    // console.log(nextWord);
-    // setCurrentWord(nextWord);
-    // setScrambledWord(scrambleWord(nextWord));
+    dispatch({ type: "RESET_GAME", payload: getInitialState() });
   };
 
   //! Si ya no hay palabras para jugar, se muestra el mensaje de fin de juego

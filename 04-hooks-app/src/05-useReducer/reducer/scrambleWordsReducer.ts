@@ -70,10 +70,9 @@ export const getInitialState = (): ScrambeWordsState => {
 
 export type ScrambleWordAction =
   | { type: "SET_GUESS"; payload: string }
-  | {
-      type: "CHECK_ANSWER";
-    }
-  | { type: "NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO3" };
+  | { type: "CHECK_ANSWER" }
+  | { type: "SKIP_WORD" }
+  | { type: "RESET_GAME"; payload: ScrambeWordsState };
 
 export const scrambleWordsReducer = (
   state: ScrambeWordsState,
@@ -110,6 +109,47 @@ export const scrambleWordsReducer = (
           isGameOver: state.errorCounter >= state.maxAllowErrors - 1,
         };
       }
+    }
+
+    case "SKIP_WORD": {
+      // const remaingWords = words.filter((word) => word !== currentWord);
+      // const nextWord = remaingWords[0];
+      // setWords(remaingWords);
+      // // * la currentword la ponemos el nexWord que viene de la primera palabra de las palabras restantes (remaingWords)
+      // setCurrentWord(nextWord);
+      // // * para que se muestre la palabra revuelta le pasamos esa nextWord al setScrambledWord y con su funcion que las revuelve le pasamos esa nextWord
+      // setScrambledWord(scrambleWord(nextWord));
+      // setSkipCounter(skipCounter + 1);
+      // setGuess("");
+      if (state.skipCounter >= state.maxSkips) return state;
+      const remainWords = state.words.filter(
+        (word) => word !== state.currentWord,
+      );
+      return {
+        ...state,
+        guess: "",
+        skipCounter: state.skipCounter + 1,
+        currentWord: remainWords[0],
+        scrambledWord: scrambleWord(remainWords[0]),
+      };
+    }
+
+    case "RESET_GAME": {
+      return action.payload;
+
+      // ! esta es una opcion pero no deberia dibujarse un nuevo estado si no volver al inicial D:
+      // const word = shuffleArray(GAME_WORDS);
+      // return {
+      //   ...state,
+      //   guess: "",
+      //   skipCounter: 0,
+      //   errorCounter: 0,
+      //   points: 0,
+      //   words: word,
+      //   currentWord: word[0],
+      //   scrambledWord: scrambleWord(word[0]),
+      //   totalWords: word.length,
+      // };
     }
 
     default:
