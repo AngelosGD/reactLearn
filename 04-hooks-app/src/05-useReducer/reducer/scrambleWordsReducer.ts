@@ -71,14 +71,14 @@ export const getInitialState = (): ScrambeWordsState => {
 export type ScrambleWordAction =
   | { type: "SET_GUESS"; payload: string }
   | {
-      type: "NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO2";
+      type: "CHECK_ANSWER";
     }
   | { type: "NO_TENGO_LA_MENOR_IDEA_DE_QUE_ACCIONES_NECESITO3" };
 
 export const scrambleWordsReducer = (
   state: ScrambeWordsState,
   action: ScrambleWordAction,
-) => {
+): ScrambeWordsState => {
   switch (action.type) {
     // ? action para el input deje escribir
     case "SET_GUESS":
@@ -86,6 +86,31 @@ export const scrambleWordsReducer = (
         ...state,
         guess: action.payload.trim().toUpperCase(),
       };
+
+    case "CHECK_ANSWER": {
+      // ? si el guess es correcto
+      if (state.currentWord === state.guess) {
+        const remaingWords = state.words.filter(
+          (word) => word !== state.currentWord,
+        );
+
+        return {
+          ...state,
+          words: remaingWords,
+          points: state.points + 1,
+          guess: "",
+          currentWord: remaingWords[0],
+          scrambledWord: scrambleWord(remaingWords[0]),
+        };
+      } else {
+        return {
+          ...state,
+          errorCounter: state.errorCounter + 1,
+          guess: "",
+          isGameOver: state.errorCounter >= state.maxAllowErrors - 1,
+        };
+      }
+    }
 
     default:
       return state;
