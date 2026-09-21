@@ -9,14 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SkipForward, Play } from "lucide-react";
 import { getInitialState } from "./reducer/scrambleWordsReducer";
 
-
-
-
 export const ScrambleWords = () => {
-
-  // ! creando el useReducer con el reducer que creamos para el scrambledWords
-  const [state, dispatch] = useReducer(ScrambleWordsReducer, getInitialState())
-
   const [words, setWords] = useState(shuffleArray(GAME_WORDS));
 
   const [currentWord, setCurrentWord] = useState(words[0]);
